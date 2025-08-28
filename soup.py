@@ -1,12 +1,43 @@
-import urllib.request as urllib2
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
+import time
+
+user = []
+file_size = 0
+i = 0
+
+print("Please enter your intra username:")
+intra_user = input()
+print("Please enter your intra password:")
+intra_pass = input()
 
 
-url = 'https://admin.intra.42.fr/users?commit=Search&q%5Bc%5D%5B0%5D%5Ba%5D%5B0%5D%5Bname%5D=campus_users_campus_id&q%5Bc%5D%5B0%5D%5Bp%5D=eq&q%5Bc%5D%5B0%5D%5Bv%5D%5B0%5D%5Bvalue%5D=58&q%5Bc%5D%5B1756235597345%5D%5Ba%5D%5B0%5D%5Bname%5D=pool_year&q%5Bc%5D%5B1756235597345%5D%5Bp%5D=eq&q%5Bc%5D%5B1756235597345%5D%5Bv%5D%5B0%5D%5Bvalue%5D=2025&q%5Bc%5D%5B1756235603985%5D%5Ba%5D%5B0%5D%5Bname%5D=pool_month&q%5Bc%5D%5B1756235603985%5D%5Bp%5D=eq&q%5Bc%5D%5B1756235603985%5D%5Bv%5D%5B0%5D%5Bvalue%5D=september&utf8=%E2%9C%93'
+with open('output.csv') as my_file:
+    user = [line.rstrip() for line in my_file]
 
-req = urllib2.Request(url, headers={'User-Agent' : "Magic Browser"})
-page = urllib2.urlopen( req )
+file_size = len(user)
 
-soup = BeautifulSoup(page)
+browser = webdriver.Chrome()
+login_url = 'https://auth.42.fr/auth/realms/students-42/protocol/openid-connect/auth?client_id=intra&redirect_uri=https%3A%2F%2Fprofile.intra.42.fr%2Fusers%2Fauth%2Fkeycloak_student%2Fcallback&response_type=code&state=b4de7e4354eab555ba76e75639ff2920334ec95c9e38817e'
+browser.get(login_url)
+time.sleep(2)
+user_name = browser.find_element(By.ID, "username")
+user_name.send_keys(intra_user)
+user_pass = browser.find_element(By.ID, "password")
+user_pass.send_keys(intra_pass)
+user_pass.send_keys(Keys.RETURN)
+time.sleep(2)
 
-print(soup.prettify())
+img_url = []
+
+while i < file_size:
+    url = "https://profile.intra.42.fr/users/" + str(user[i])
+    browser.get(url)
+    soup = BeautifulSoup(browser.page_source, 'lxml')
+    for img in soup.find_all('img', alt=True):
+        img_url.append(img['src'])
+    print(img_url[1])
+    img_url = []
+    i += 1
