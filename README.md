@@ -1,17 +1,5 @@
 <div align="center">
 
-# Intra Pictures
-
-## Description
-
-</div>
-
-This is a very simple way to get students and pisciners photos from Intra, the platform used by the 42 School.
-
----
-
-<div align="center">
-
 ## Requirements
 
 </div>
