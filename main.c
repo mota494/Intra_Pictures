@@ -6,7 +6,7 @@
 /*   By: mloureir <mloureir@42porto.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 14:40:21 by mloureir          #+#    #+#             */
-/*   Updated: 2025/08/28 16:47:06 by mloureir         ###   ########.pt       */
+/*   Updated: 2025/09/01 11:45:54 by mloureir         ###   ########.pt       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int main()
 	FILE *csv = fopen("users.csv", "r");
 	if (!csv)
 	{
-		perror("\nThe file doesn't exist\n");
+		perror("\033[0;31mThe input file doesn't exist\033[0m\n");
 		return (-1);
 	}
 

@@ -4,10 +4,15 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from getpass import getpass
 import time
+import os
 
 user = []
 file_size = 0
 i = 0
+
+if not os.path.exists('output.csv'):
+    print("No output file from C Program")
+    exit(255)
 
 print("Please enter your intra username:")
 intra_user = input()
