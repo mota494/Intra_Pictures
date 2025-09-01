@@ -2,8 +2,6 @@
 
 # Intra Pictures
 
----
-
 ## Description
 
 </div>
