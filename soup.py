@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
+from getpass import getpass
 import time
 
 user = []
@@ -10,12 +11,12 @@ i = 0
 
 print("Please enter your intra username:")
 intra_user = input()
-print("Please enter your intra password:")
-intra_pass = input()
-
+intra_pass = getpass("Please enter your intra password:")
 
 with open('output.csv') as my_file:
     user = [line.rstrip() for line in my_file]
+
+f = open("final.csv", "w")
 
 file_size = len(user)
 
@@ -38,6 +39,8 @@ while i < file_size:
     soup = BeautifulSoup(browser.page_source, 'lxml')
     for img in soup.find_all('img', alt=True):
         img_url.append(img['src'])
-    print(img_url[1])
+    f.write(img_url[1])
+    f.write('\n')
     img_url = []
     i += 1
+browser.close()
