@@ -1,5 +1,6 @@
 # Moar files
 *.csv
+*.env
 
 # Prerequisites
 *.d

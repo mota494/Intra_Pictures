@@ -14,8 +14,7 @@ if not os.path.exists('output.csv'):
     print("No output file from C Program")
     exit(255)
 
-print("Please enter your intra username:")
-intra_user = input()
+intra_user = input("Please enter your intra username:")
 intra_pass = getpass("Please enter your intra password:")
 
 with open('output.csv') as my_file:
