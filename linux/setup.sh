@@ -38,13 +38,10 @@ else
 	exit 1
 fi
 
-cc main.c
-./a.out
+cc main.c && ./a.out
 
 python3 soup.py
 
-rm -rf ./users.csv
-rm -rf ./output.csv
-rm -rf a.out
+rm -rf ./users.csv a.out ./output.csv
 
 printf "${IGreen}Done\n${NC}"
