@@ -22,9 +22,9 @@ For this to work you'll need:
 
 To start, head over to the users manager page on your intra admin tools and use the filters to set the range of students that you want to pull the images.
 
-After you download the file in a .csv format, rename it to `users.csv` and paste it on the root folder of this repository.
+After you download the file in a .csv format, rename it to `users.csv` and paste it on the root folder for your OS.
 
-When you're done with that just run the Makefile with `Make`.
+When you're done with that just run the `setup.sh` for Linux or `setup.ps1` for Windows.
 
 After the program has started it will prompt you to fill out your intra credentials, this **doesn't** need to be an admin account 
 
