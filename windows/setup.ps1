@@ -1,47 +1,75 @@
-#!/usr/bin/env bash
+# Define colors
+$Host.UI.RawUI.ForegroundColor = 'White'  # Default color
 
-IRed='\033[0;91m'
-NC='\033[0m'
-IGreen='\033[0;92m'
+function Write-Color {
+    param(
+        [string]$Text,
+        [string]$Color = 'White'
+    )
+    $oldColor = $Host.UI.RawUI.ForegroundColor
+    $Host.UI.RawUI.ForegroundColor = $Color
+    Write-Host $Text
+    $Host.UI.RawUI.ForegroundColor = $oldColor
+}
 
-python3 --version > /dev/null 
+# Check if python3 is installed
+try {
+    $pythonVersion = & python3 --version 2>$null
+    if (-not $?) {
+        throw "Python3 not found"
+    }
+    Write-Color "Python is installed" "Green"
+} catch {
+    Write-Color "Python's not installed`nPlease install the latest version of python3 with your package manager" "Red"
+    exit 1
+}
 
-if	[ $? -eq 127 ]; then
-	printf "${IRed}Python's not installed\nPlease install the latest version of python3 with your package manager\n${NC}"
-	exit 1
-else
-	printf "${IGreen}Python is installed\n${NC}"
-fi
+# Run test.py
+& python3 test.py
+$lastExitCode = $LASTEXITCODE
 
-python3 test.py
+switch ($lastExitCode) {
+    0 {
+        Write-Color "Every package necessary is installed" "Green"
+    }
+    30 {
+        Write-Color "Both packages are missing" "Red"
+        & pip3 install selenium
+        & pip3 install beautifulsoup4
+    }
+    10 {
+        Write-Color "Selenium is missing" "Red"
+        & pip3 install selenium
+    }
+    20 {
+        Write-Color "BeautifulSoup is missing" "Red"
+        & pip3 install beautifulsoup4
+    }
+}
 
-if [ $? -eq 0 ]; then
-	printf "${IGreen}Every package necessary is installed\n${NC}"
-elif [ $? -eq 30 ]; then
-	printf "${IRed}Both packages are missing\n${NC}"
-	pip3 install selenium
-	pip3 install beautifulsoup4
-elif [ $? -eq 10 ]; then
-	printf "${IRed}Selenium is missing\n${NC}"
-	pip3 install selenium
-elif [ $? -eq 20 ]; then
-	printf "${IRed}BeautifulSoup is missing\n${NC}"
-	pip3 install beautifulsoup4
-fi
+# Check if users.csv exists
+$first_file = ".\users.csv"
+if (Test-Path $first_file) {
+    Write-Color "Found users.csv, compiling C program" "Green"
+} else {
+    Write-Color "No users.csv found" "Red"
+    exit 1
+}
 
-first_file=./users.csv
+# Compile and run C program
+gcc main.c -o main.exe
+if ($LASTEXITCODE -eq 0) {
+    & .\main.exe
+} else {
+    Write-Color "Compilation failed" "Red"
+    exit 1
+}
 
-if [ -e "$first_file" ]; then
-	printf "${IGreen}Found users.csv, compiling C program\n${NC}"
-else
-	printf "${IRed}No users.csv found\n${NC}"
-	exit 1
-fi
+# Run soup.py
+& python3 soup.py
 
-cc main.c && ./a.out
+# Clean up
+Remove-Item -Force .\users.csv, .\main.exe, .\output.csv -ErrorAction SilentlyContinue
 
-python3 soup.py
+Write-Color "Done" "Green"
 
-rm -rf ./users.csv a.out ./output.csv
-
-printf "${IGreen}Done\n${NC}"
