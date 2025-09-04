@@ -45,5 +45,6 @@ python3 soup.py
 
 rm -rf ./users.csv
 rm -rf ./output.csv
+rm -rf a.out
 
-printf "${IGreen}Done${NC}"
+printf "${IGreen}Done\n${NC}"
