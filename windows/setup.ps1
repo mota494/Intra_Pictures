@@ -16,11 +16,11 @@ function Write-Color {
 try {
     $pythonVersion = & python3 --version 2>$null
     if (-not $?) {
-        throw "Python3 not found"
+        throw "Python not found"
     }
     Write-Color "Python is installed" "Green"
 } catch {
-    Write-Color "Python's not installed`nPlease install the latest version of python3 with your package manager" "Red"
+    Write-Color "Python's not installed`nPlease install the latest version of python with your package manager" "Red"
     exit 1
 }
 

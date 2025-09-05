@@ -7,11 +7,10 @@
 For this to work you'll need:
 
 - A 42 school staff account
-- GNU Make
-- A C compiler
+- A C compiler `GNU Compiler Collection for Linux and Cygwin for Windows`
 - Python 3
-- beautifulsoup `pip3 install beautifulsoup4` 
-- selenium `pip3 install selenium`
+- beautifulsoup4 
+- selenium
 - Google Chrome
 
 <div align="center">
