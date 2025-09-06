@@ -6,7 +6,7 @@
 /*   By: mloureir <mloureir@42porto.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 14:40:21 by mloureir          #+#    #+#             */
-/*   Updated: 2025/09/01 11:45:54 by mloureir         ###   ########.pt       */
+/*   Updated: 2025/09/06 16:14:21 by mloureir         ###   ########.pt       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_READ 500
+#define MAX_READ 512
 
 char	*ft_strjoin(char *tojoin, char *tocpy)
 {
