@@ -21,7 +21,9 @@ For this to work you'll need:
 
 To start, head over to the users manager page on your intra admin tools and use the filters to set the range of students that you want to pull the images.
 
-After you download the file in a .csv format, rename it to `users.csv` and paste it on the root folder for your OS.
+Clone this reposotory and open it.
+
+After you download the file in a .csv format and clone the reposotory, copy the .csv file into the `linux` folder if you're on linux or the `windows` folder if you're on windows.
 
 When you're done with that just run the `setup.sh` for Linux or `setup.ps1` for Windows.
 

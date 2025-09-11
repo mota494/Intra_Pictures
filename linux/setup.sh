@@ -42,6 +42,6 @@ cc main.c && ./a.out
 
 python3 soup.py
 
-rm -rf ./users.csv a.out ./output.csv
+rm -rf a.out ./output.csv
 
 printf "${IGreen}Done\n${NC}"
