@@ -12,6 +12,7 @@ For this to work you'll need:
 - beautifulsoup4 
 - selenium
 - Google Chrome
+- Intra V2, only use Intra V2
 
 <div align="center">
 
